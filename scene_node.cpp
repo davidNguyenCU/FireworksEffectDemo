@@ -43,6 +43,8 @@ SceneNode::SceneNode(const std::string name, const Resource *geometry, const Res
 
     // Other attributes
     scale_ = glm::vec3(1.0, 1.0, 1.0);
+	offsetSpawn = ((double)rand() / (RAND_MAX));
+	randomColor = glm::vec3(((double)rand() / (RAND_MAX)), ((double)rand() / (RAND_MAX)), ((double)rand() / (RAND_MAX)));
 }
 
 
@@ -204,6 +206,9 @@ void SceneNode::SetupShader(GLuint program){
     GLint normal_mat = glGetUniformLocation(program, "normal_mat");
     glUniformMatrix4fv(normal_mat, 1, GL_FALSE, glm::value_ptr(normal_matrix));
 
+	GLint object_color = glGetUniformLocation(program, "object_color");
+	glUniform3fv(object_color, 1, glm::value_ptr(randomColor));
+
     // Texture
     if (texture_){
         GLint tex = glGetUniformLocation(program, "texture_map");
@@ -219,7 +224,7 @@ void SceneNode::SetupShader(GLuint program){
     // Timer
     GLint timer_var = glGetUniformLocation(program, "timer");
     double current_time = glfwGetTime();
-    glUniform1f(timer_var, (float) current_time);
+    glUniform1f(timer_var, (float) current_time+offsetSpawn);
 }
 
 } // namespace game;

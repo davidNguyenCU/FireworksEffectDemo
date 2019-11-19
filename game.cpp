@@ -126,6 +126,11 @@ void Game::SetupScene(void){
 
     // Create particles
     game::SceneNode *particles = CreateInstance("ParticleInstance1", "SphereParticles", "ParticleMaterial");
+	
+	game::SceneNode *particles1 = CreateInstance("ParticleInstance1", "SphereParticles", "ParticleMaterial");
+	particles1->SetPosition(glm::vec3(-1.5f, -0.5f, 0));
+	game::SceneNode *particles2 = CreateInstance("ParticleInstance1", "SphereParticles", "ParticleMaterial");
+	particles2->SetPosition(glm::vec3(1.5f, 0.5f, 0));
 }
 
 
